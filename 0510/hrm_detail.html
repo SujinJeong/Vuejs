@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app" class="container">
+      <h2 class="text-center">사원 정보</h2>
+      <table class="table table-condensed w-25">
+        <thead>
+          <tr>
+            <th width="20%">ID</th>
+            <th width="20%">이름</th>
+            <th width="20%">부서이름</th>
+            <th width="20%">사원</th>
+            <th width="20%">급여</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{emp.id}}</td>
+            <td>{{emp.name}}</td>
+            <td>{{emp.deptName}}</td>
+            <td>{{emp.title}}</td>
+            <td>{{emp.salary}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="text-center">
+        <a href="./hrm_list.html" class="btn btn-primary text-right">목록</a>
+      </div>
+    </div>
+
+    <script>
+      let emp = {
+        id: "",
+        name: "",
+        deptName: "",
+        title: "",
+        salary: "",
+      };
+
+      const emps = [
+        {
+          id: "1",
+          name: "박구곤",
+          deptName: "인사부",
+          title: "사장",
+          salary: "60000",
+        },
+        {
+          id: "18",
+          name: "서정주",
+          deptName: "기획부",
+          title: "사원",
+          salary: "13000",
+        },
+        {
+          id: "19",
+          name: "안창환",
+          deptName: "기획부",
+          title: "사원",
+          salary: "678",
+        },
+        {
+          id: "20",
+          name: "윤정숙",
+          deptName: "기획부",
+          title: "사원",
+          salary: "750",
+        },
+        {
+          id: "21",
+          name: "장현철",
+          deptName: "기획부",
+          title: "사원",
+          salary: "8500",
+        },
+        {
+          id: "23",
+          name: "강연범",
+          deptName: "영업부",
+          title: "사원",
+          salary: "795",
+        },
+        {
+          id: "24",
+          name: "오은경",
+          deptName: "기획부",
+          title: "사원",
+          salary: "860",
+        },
+        {
+          id: "27",
+          name: "장길산",
+          deptName: "영업부",
+          title: "과장",
+          salary: "12345",
+        },
+        {
+          id: "28",
+          name: "장취산",
+          deptName: "영업부",
+          title: "사원",
+          salary: "23244",
+        },
+        {
+          id: "29",
+          name: "김상순",
+          deptName: "기획부",
+          title: "사원",
+          salary: "20000",
+        },
+        {
+          id: "30",
+          name: "장삼봉",
+          deptName: "인사부",
+          title: "사원",
+          salary: "10000",
+        },
+        {
+          id: "31",
+          name: "백소정",
+          deptName: "인사부",
+          title: "사원",
+          salary: "20000",
+        },
+        {
+          id: "33",
+          name: "조현욱",
+          deptName: "회계부",
+          title: "사원",
+          salary: "1500",
+        },
+      ];
+
+      new Vue({
+        el: "#app",
+        data: {
+          emp: emp,
+        },
+
+        created() {
+          let uri = window.location.href.split("?");
+          //   id 변수 넘어왔을떄
+          if (uri.length == 2) {
+            // 모든 변수 가져오기
+            let vars = uri[1].split("&");
+            let getVars = {};
+            let tmp = "";
+            vars.forEach(function (v) {
+              // v는 id=3 이런 형식으로 넘어옴
+              tmp = v.split("=");
+              // key, value가 제대로 들어왔을때
+              if (tmp.length == 2) getVars[tmp[0]] = tmp[1];
+            });
+
+            emps.forEach((data) => {
+              // getVars { "id" : 3 } 이렇게 넘어온거임
+              if (data.id == getVars.id) {
+                this.emp = { ...data };
+                // for-each 탈출하려면 return false 해줘야함
+                return false;
+              }
+            });
+          }
+        },
+      });
+    </script>
+  </body>
+</html>
