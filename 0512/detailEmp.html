@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+      th {
+        background-color: #4d6bb3;
+        color: white;
+      }
+      th,
+      td {
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app" class="container">
+      <h2 class="text-center">사원 정보</h2>
+      <emp-comp :emp="emp"></emp-comp>
+      <div class="text-align"></div>
+      <div class="text-center">
+        <button class="btn btn-primary" @click="moveList">목록</button>
+      </div>
+    </div>
+
+    <template id="EmpComp">
+      <div>
+        <table class="table table-condensed w-25">
+          <colgroup>
+            <col width="20%" />
+            <col width="20%" />
+            <col width="20%" />
+            <col width="20%" />
+            <col width="20%" />
+          </colgroup>
+          <tr>
+            <th>사원 아이디</th>
+            <th>사원명</th>
+            <th>부서</th>
+            <th>직책</th>
+            <th>연봉</th>
+          </tr>
+          <tr>
+            <td>{{emp.id}}</td>
+            <td>{{emp.name}}</td>
+            <td>{{emp.deptName}}</td>
+            <td>{{emp.title}}</td>
+            <td>{{emp.salary}}</td>
+          </tr>
+        </table>
+      </div>
+    </template>
+
+    <script type="module">
+      import EmpComp from "./components/EmpComp.js";
+      const params = new URL(document.location).searchParams;
+      const id = params.get("id");
+      new Vue({
+        el: "#app",
+        data: {
+          id: id,
+          emp: {
+            id: "",
+            name: "",
+            email: "",
+            hireDate: "",
+            title: "",
+            superV: "",
+            deptName: "",
+            salary: "",
+            commission: "",
+            titleList: "",
+            deptList: "",
+          },
+        },
+        created() {
+          const board = localStorage.getItem("emp_board");
+          let newBoard = {
+            sequence: 0,
+            emps: [],
+          };
+
+          if (board) {
+            newBoard = JSON.parse(board);
+          } else {
+            localStorage.setItem("emp_board", JSON.stringify(newBoard));
+          }
+
+          newBoard.emps.forEach((data) => {
+            if (data.id == id) {
+              this.emp = { ...data };
+            }
+          });
+        },
+        methods: {
+          moveList() {
+            location.href = "./emps.html";
+          },
+        },
+        components: {
+          EmpComp,
+        },
+      });
+    </script>
+  </body>
+</html>

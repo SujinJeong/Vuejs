@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <style>
+      th {
+        background-color: #4d6bb3;
+        color: white;
+      }
+      th,
+      td {
+        text-align: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="app" class="container">
+      <h2 class="text-center text-primary">SSAFY HRM ADD EMPLOYEE</h2>
+      <div>
+        <!-- <regist-comp
+          :name="name"
+          :email="email"
+          :hireDate="hireDate"
+          :superV="superV"
+          :deptName="deptName"
+          :salary="salary"
+          :commission="commission"
+          :titleList="titleList"
+          :deptList="deptList"
+        ></regist-comp> -->
+        <regist-comp></regist-comp>
+      </div>
+    </div>
+
+    <template id="RegistComp">
+      <div>
+        <table class="table table-bordered table-condensed">
+          <colgroup>
+            <col width="30%" />
+            <col width="70%" />
+          </colgroup>
+          <tr>
+            <div class="form-group">
+              <th><label for="name">이름</label></th>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="name"
+                  ref="name"
+                  placeholder="이름"
+                  v-model="name"
+                />
+              </td>
+            </div>
+          </tr>
+          <tr>
+            <div class="form-group">
+              <th><label for="email">이메일</label></th>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+                  ref="email"
+                  placeholder="이메일"
+                  v-model="email"
+                />
+              </td>
+            </div>
+          </tr>
+          <tr>
+            <div class="form-group">
+              <th><label for="hireDate">고용일</label></th>
+              <td>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="hireDate"
+                  ref="hireDate"
+                  placeholder="연도-월-일"
+                  v-model="hireDate"
+                />
+              </td>
+            </div>
+          </tr>
+          <tr>
+            <div class="form-group">
+              <th><label for="superV">관리자</label></th>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="superV"
+                  ref="superV"
+                  placeholder="관리자"
+                  v-model="superV"
+                />
+              </td>
+            </div>
+          </tr>
+          <tr>
+            <div class="form-group">
+              <th><label for="title">직책</label></th>
+              <td>
+                <select v-model="title" class="form-control" id="title" ref="title">
+                  <option v-for="(temp,idx) in titleList" :value="temp">{{temp}}</option>
+                </select>
+              </td>
+            </div>
+          </tr>
+          <tr>
+            <div class="form-group">
+              <th><label for="deptName">부서</label></th>
+              <td>
+                <select v-model="deptName" class="form-control" id="deptName" ref="deptName">
+                  <option v-for="(temp,idx) in deptList" :value="temp">{{temp}}</option>
+                </select>
+              </td>
+            </div>
+          </tr>
+          <tr>
+            <div class="form-group">
+              <th><label for="salary">월급</label></th>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="salary"
+                  ref="salary"
+                  placeholder="연봉"
+                  v-model="salary"
+                />
+              </td>
+            </div>
+          </tr>
+          <tr>
+            <div class="form-group">
+              <th><label for="commission">커미션</label></th>
+              <td>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="commission"
+                  ref="commission"
+                  placeholder="커미션"
+                  v-model="commission"
+                />
+              </td>
+            </div>
+          </tr>
+        </table>
+        <div class="text-center">
+          <button class="btn btn-primary" @click="checkHandler">사원추가</button>
+          <button class="btn btn-primary" @click="moveList">목록</button>
+        </div>
+      </div>
+    </template>
+    <script type="module">
+      import RegistComp from "./components/RegistComp.js";
+      new Vue({
+        el: "#app",
+        components: {
+          RegistComp,
+        },
+      });
+    </script>
+  </body>
+</html>
